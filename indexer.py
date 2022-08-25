@@ -8,9 +8,9 @@ import pandas as pd
 import redis
 
 # Source, Sync & Checkpoint Paths
-table_path = "/delta/partitioned1/"
+table_path = "/delta/partitioned200/"
 table_logs_path = f"{table_path}_delta_log/*.json"
-stream_to_redis_checkpoint_path = "/Checkpoints/indexing2"
+stream_to_redis_checkpoint_path = "/Checkpoints/indexing200"
 
 # Spark Confs
 _conf = SparkConf()
@@ -21,7 +21,7 @@ _conf.set("spark.sql.streaming.minBatchesToRetain", 50)
 
 # Creating Connections
 spark_session = SparkSession.builder.config(conf=_conf).getOrCreate()
-pyArrow_hdfs_connector = fs.HadoopFileSystem("172.17.135.31", 9000, user="hadoop")
+pyArrow_hdfs_connector = fs.HadoopFileSystem("master", 9000, user="hadoop")
 redis_connector = redis.Redis(host='dn6', port=6379)
 
 schema = (StructType()
