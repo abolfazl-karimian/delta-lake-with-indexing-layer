@@ -16,7 +16,7 @@ _conf.set("spark.sql.shuffle.partitions", 10)
 
 # Creating Connections
 spark_session = SparkSession.builder.config(conf=_conf).getOrCreate()
-pyArrow_hdfs_connector = fs.HadoopFileSystem("172.17.135.31", 9000, user="hadoop")
+pyArrow_hdfs_connector = fs.HadoopFileSystem("master", 9000, user="hadoop")
 
 # No Spark - Just PyArrow
 files = ["/delta/test/part-00000-1fb824a5-5936-4323-a765-f35fe8369fc7-c000.snappy.parquet|1",
